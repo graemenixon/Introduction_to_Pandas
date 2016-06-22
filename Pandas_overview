@@ -1,0 +1,60 @@
+Helpful Functions:
+pd.read_csv("csv name", names = ["Header Names (if none exist)", index_col = #]
+.to_csv("csv file", header = False) // Eliminates headerx
+.head(#) = displays a slice of the spreadsheet, 5 by default, set by #
+.tail(#) = displays the tail of the spreadsheet (same as head but counts from bottom)
+.set_index("Column Title", inplace=True) = re-indexes the dataset by a desired column title. Inplace refers to whether you want
+  to make it a new data object or change the existing one. Without inplace, you'd need to asssign to a new variable:
+  e.g.,: df = df.set_index('Day', inplace=True)
+.rename(columns={"Existing Column Name": "Desired name"}, inplace = True)
+
+
+
+
+# Important for importing relevant librarires:
+
+# Import pandas:
+import pandas as pd
+
+# Datetime module:
+import datetime
+
+# Used to pull data from the web:
+import pandas_datareader as web
+from pandas_datareader import data, wb
+
+# Note: data.(method), specifically data.DataReader will let us pull web data
+
+# Pyplot is basic matplotlib graphing module.
+# Style helps us quickly make our graphs look good
+
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+# Style.use lets us choose a style
+style.use('fivethirtyeight')
+
+# The following code will display a graph of a stock's variable, in this case "Low"
+
+
+# Initialize the dates and set it to variables. Format: (YYYY, M, D)
+start = datetime.datetime(2010, 1, 1)
+end = datetime.datetime(2015, 8, 22)
+
+# Pulls data for Exxon from Yahoo Finance API and stores it in df
+# data.DataReader(Stock Ticker, API, StartDate, EndDate)
+
+df = data.DataReader("XOM", "yahoo", start, end)
+
+df["Low"].plot()
+plt.legend()
+plt.show()
+
+# Can plot multiple trendlines
+
+df[["Low", "High"]].plot()
+plt.legend()
+plt.show()
+
+
+
