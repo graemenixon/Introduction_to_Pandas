@@ -4,3 +4,44 @@ api_key = "FIND ON QUANDL ACCOUNT SETINGS"
 
 # Quandl.get("Dataset you want", authtoken="your unique API key")
 df_4 = Quandl.get("FMAC/HPI_TX", authtoken=api_key)
+
+# Building a ticker for cycling states through a Quanl dataset:
+
+# Import Quandl and pandas, note for Python 2 it's "Q" and for Python 3 it's "q"
+import Quandl
+import pandas as pd
+
+api_key = "s-ysAfRLgo_Bsux4HcuQ"
+
+df = Quandl.get("FMAC/HPI_TX", authtoken=api_key)
+
+# I CANNOT GET read_html to work with Python 3 because of html5lib, but for P2 it works
+fifty_states = pd.read_html("https://simple.wikipedia.org/wiki/List_of_U.S._states")
+# fifty_states is a LIST of DATAFRAMES from the site. The first one
+# is the one we want - so let's grab it.
+##print(fifty_states)
+
+# Grabbing the FIRST dataframe, which is a table
+abbr_fifty_states = fifty_states[0]
+
+# We just want column 0 of this table, the "Abbreviation" column.
+# The first 0 refers to the first dataframe, the second 0 to the first
+# column within that dataframe.
+fifty_states[0][0]
+
+# But we don't want the header. We single it out with column 0 [1:]
+# List of abbrevations:
+# First #: The dataframe we want, Second #: The column we want,
+# Third #: the place / range we want to start from
+
+for abbv in fifty_states[0][0][1:]:
+    print(abbv)
+
+# Combining dataframes:
+
+When combining dataframes, you might have quite a few goals in mind. For example, you may want to "append" to them, 
+where you may be adding to the end, basically adding more rows. Or maybe you want to add more columns, like in our case. 
+There are four major ways of combining dataframes, which we'll begin covering now. The four major ways are: 
+Concatenation, joining, merging, and appending
+
+
