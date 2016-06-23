@@ -1,0 +1,6 @@
+# Importing Quandl data:
+
+api_key = "FIND ON QUANDL ACCOUNT SETINGS"
+
+# Quandl.get("Dataset you want", authtoken="your unique API key")
+df_4 = Quandl.get("FMAC/HPI_TX", authtoken=api_key)
